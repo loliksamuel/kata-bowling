@@ -7,14 +7,14 @@ package com.pointer.kata.bowling;
  * create by : Samuel Cardonis
  * update by :
  * update date:
+ *
  */
 
 public class GameEasy {
 
   public static final int PINS = 10;
   private int m_playCounter = 0;
-  private int[] m_arrPlays = new int[21];//there can be up to 21 rolls in bowling cause  last 10th frame can have 3 rolls.
-
+  private int[] m_arrPlays = new int[21];//this arr is to remember all rows for a good calculation of score. there can be up to 21 rolls in bowling if all first 9 frames are with no strike but at last 10th has 3 strikes, (frame can have 3 rolls).
 
   public GameEasy() {
     System.out.println("GAME START\n");
@@ -32,30 +32,36 @@ public class GameEasy {
     System.out.println(m_playCounter + ". " + pinsDown);
   }
 
-  private boolean isStrike(int idx) {
-    return m_arrPlays[idx] == PINS;
-  }
-
-  private boolean isSpare(int idxRoll1, int idxRoll2) {
-    return (m_arrPlays[idxRoll1] + m_arrPlays[idxRoll2] == PINS && m_arrPlays[idxRoll1] != PINS);
-  }
-
   public int score() {
     int totalScore = 0;
     int i = 0;
     for (int frm = 0; frm < 10; frm++) {
-      if (isStrike(i)) {
-        totalScore += PINS + m_arrPlays[i + 1] + m_arrPlays[i + 2];
+      FrameRegular gh = getFrameInstance(i);
+
+      if (m_arrPlays[i] == PINS) {//strike
+        totalScore += gh.scoreFrame(m_arrPlays, i);
         i += 1;//jump to next frame, cause if you strike on 1st roll, you cannot roll again. you jump to next frame
-      } else if (isSpare(i, i + 1)) {
-        totalScore += PINS + m_arrPlays[i + 2];
+      } else if ((m_arrPlays[i] + m_arrPlays[i + 1] == PINS && m_arrPlays[i] != PINS)) {//spare
+        totalScore += gh.scoreFrame(m_arrPlays, i);
         i += 2;//jump to next frame
       } else {//no spare no strike
-        totalScore += m_arrPlays[i] + m_arrPlays[i + 1];
+        totalScore += gh.scoreFrame(m_arrPlays, i);
         i += 2;//jump to next frame
       }
+
     }
     return totalScore;
+  }
+
+  private FrameRegular getFrameInstance(int i) {
+    FrameRegular gh;
+    if (m_arrPlays[i] == PINS) {//strike
+      return new FrameStrike();
+    } else if ((m_arrPlays[i] + m_arrPlays[i + 1] == PINS && m_arrPlays[i] != PINS)) {//spare
+      return new FrameSpare();
+    } else {//no spare no strike
+      return new FrameRegular();
+    }
   }
 
   public void show() {

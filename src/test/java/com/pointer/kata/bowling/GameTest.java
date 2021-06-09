@@ -18,7 +18,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
+ * tdd
+ * demonstrates how to write test before implementation
+ * the test guide the design
+ * and the implementation naturally become testable
+ * 10 frames
+ * each frame has 2 rolls (throws)
+ * score of frame is the sum of all rolls in the frame for ex. 2+3=5
+ * frame can have 2 type of bonuses:
+ * bonus spare:  knock down all pins in 2 rolls (for ex. 5+5)  bonus is next 1 roll
+ * bonus strike: knock down all pins in 1st roll(for ex. 10)   bonus is next 2 rolls
  *
+ * 10th frame can have 3 rolls to support strike on 1st roll of 10th frame
  */
 public class GameTest {
 
