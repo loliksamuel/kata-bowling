@@ -112,7 +112,7 @@ public class GameTest {
   }
 
   @Test
-  @DisplayName("all strikes")
+  @DisplayName("testPerfectGame all strikes = 300")
   void testPerfectGame() {
     final int rolls = 10;
     final int pinsDown = 10;
@@ -124,6 +124,7 @@ public class GameTest {
   }
 
   @Test
+  @DisplayName("all spares = 150")
   void spareAll() {
     final int rolls = 20;
     final int pinsDown = 5;
