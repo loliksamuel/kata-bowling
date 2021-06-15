@@ -103,6 +103,7 @@ public class GameTest {
   }
 
   @Test
+  @DisplayName("test single strike = 30")
   void strike() {
     m_game.roll(10);
     assertEquals(10, m_game.score());
