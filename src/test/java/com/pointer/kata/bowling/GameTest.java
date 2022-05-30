@@ -18,7 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * tdd
+ * TDD PROGRMAMING
  * demonstrates how to write test before implementation
  * the test guide the design
  * and the implementation naturally become testable
